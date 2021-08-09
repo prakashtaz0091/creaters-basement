@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{% static 'app/images/CB-01.png' %}" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css" rel="stylesheet" />
+    <title>Confirm Buying</title>
+
+</head>
+
+<body class="bg-dark">
+    <nav class="navbar navbar-expand-lg navbar navbar-warning bg-warning">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'app/images/assets/images/CB-01.png' %}" alt="" width="50" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a><strong style="color: white;">Creators Basement</strong></a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav><br>
+    <div class="container-sm">
+
+    </div>
+
+    <!-- success message -->
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+
+    <div class="container">
+        <div class="row mx-auto">
+            <div class="col-md-6 mx-auto bg-light rounded">
+
+                <h1 class="text-center my-5" style="text-decoration-line: underline;">PRICE DETAILS</h1>
+                <hr>
+                <form action="https://uat.esewa.com.np/epay/main" method="POST" style="padding: 2rem;">
+                    {% csrf_token %}
+
+                    <h6>Total Price:&nbsp;&nbsp;Rs. {{item.total_price}} </h6>
+                    <hr>
+                    <h6>Actual Price:&nbsp;&nbsp;Rs. {{item.actual_price}} </h6>
+                    <hr>
+                    <h6>Tax Amount:&nbsp;&nbsp;Rs. {{item.tax_amount|truncatechars:7}} </h6>
+                    <hr>
+                    <h6>Service Charge:&nbsp;&nbsp;Rs. {{item.service_charge}} </h6>
+                    <hr>
+                    <h6>Delivery Charge:&nbsp;&nbsp;Rs. {{item.delivery_charge}} </h6>
+                    <hr>
+                    <br><br>
+
+                    <input value="{{item.total_price}}" name="tAmt" type="hidden">
+                    <input value="{{item.actual_price}}" name="amt" type="hidden">
+                    <input value="{{item.tax_amount}}" name="txAmt" type="hidden">
+                    <input value="{{item.service_charge}}" name="psc" type="hidden">
+                    <input value="{{item.delivery_charge}}" name="pdc" type="hidden">
+                    <input value="EPAYTEST" name="scd" type="hidden">
+                    <input value="{{ pid }}" name="pid" type="hidden" class="text-dark">
+                    <input value="http://127.0.0.1:8000/esewa-verification/" type="hidden" name="su">
+                    <input value="http://127.0.0.1:8000/get-our-music/" type="hidden" name="fu">
+                    <button type="submit" class="btn btn-warning mb-5 mx-auto text-dark text-center"> Proceed
+                        Payment</button>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+</body>
+<footer class="bg-light text-center text-lg-start" style="margin-bottom: 0;">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color:#FF9900;">
+        © 2020 Copyright:<br>
+        <a class="text-dark" href="#">Creators Basement</a>
+    </div>
+</footer>
+<style>
+    footer {
+        position: fixed;
+        padding: 10px 10px 0px 10px;
+        bottom: 0;
+        width: 100%;
+
+    }
+</style>
+
+</html>

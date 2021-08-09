@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}
+User Login
+{% endblock title %}
+
+
+{% block content %}
+{% load static %}
+ <!-- Font Awesome -->
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+
+ 
+<nav class="navbar navbar-expand-lg navbar navbar-warning bg-warning">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}">
+      <img src="{% static 'app/images/assets/images/CB-01.png' %}" alt="" width="50" height="50">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a><strong style="color: white;">Creators Basement</strong></a>
+        </li>
+
+      </ul>
+    </div>
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a href="{% url 'home' %}" style="text-decoration: none;" class="nav-link text-dark"><i
+            class="fas fa-home fa-2x "></i>
+          <big><big>Home</big></big></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+<div class="container-fluid bg-dark py-5" style="min-height: 100vh;">
+
+  <!-- messages -->
+  {% for message in messages %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{message}}!</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+
+  <!-- messages ends here -->
+
+
+  <div class="container bg-light py-5">
+    <div class="container col-md-6 mx-auto rounded">
+
+      <h1 class="text-center">User Login</h1>
+      <hr>
+      <form action="" method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label for="username">Username*</label>
+          <input type="text" class="form-control" name="username">
+        </div>
+        <div class="form-group">
+          <label for="password">Password*</label>
+          <input type="password" class="form-control" name="password">
+        </div>
+
+
+        <button type="submit" class="btn btn-warning" style="min-width: 8vw;">Login</button>
+        <br>
+        <hr>
+        <p>Don't have an account ?</p>
+        <a href="{% url 'registerPage' %}" type="button" class="btn btn-warning" style="min-width: 8vw;">Register</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}

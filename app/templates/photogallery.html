@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="{% static 'app/images/CB-01.png' %}" type="image/x-icon">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Gallery</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+
+<body class="bg-dark">
+  <nav class="navbar navbar-expand-lg navbar navbar-warning bg-warning">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'app/images/assets/images/CB-01.png' %}" alt="" width="60" height="60">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a><strong style="color: white;">Creators Basement</strong></a>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+
+
+  <div class="container" style="min-height: 85vh;">
+    <div class="jumbotron text-white">
+      <h1>Image Gallery</h1>
+      <p>Some of our great momories.
+    </div>
+
+    {% if admin %}
+    <hr><br>
+    <div class="jumbotron text-white">
+      <h1>Upload Image</h1>
+      <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="input-group">
+          <input type="file" name="image" class="form-control" id="" aria-describedby="inputGroupFileAddon04"
+            aria-label="Upload" required>
+          <button class="btn btn-outline-secondary" type="submit">Upload</button>
+        </div>
+      </form>
+    </div>
+    <br><br>
+    {% endif %}
+
+
+    <div class="row">
+      {% for image in images %}
+
+      <div class="col-sm-4 col-md-3 mb-3">
+        <img src="{{image.image.url}}" alt="" class="fluid img-thumbnail">
+
+        {% if admin %}
+        <form action="{% url 'removeMemories' image.id %}" method="POST" class="text-center">
+          {% csrf_token %}
+          
+          <button type="submit" class="btn btn-danger ">Remove</button>
+        </form>
+        {% endif %}
+      </div>
+
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <footer class="bg-light text-center text-lg-start">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color:#FF9900;">
+      © 2020 Copyright:<br>
+      <a class="text-dark" href="#">Creators Basement</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

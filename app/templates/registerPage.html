@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+  User Registration
+{% endblock title %}
+
+
+{% block content %}
+  
+<div class="container-fluid bg-dark py-5" style="min-height: 100vh;">
+  
+  <div class="container bg-light py-5">
+    <div class="container col-md-6 mx-auto rounded">
+
+      <h1 class="text-center">User Registration</h1>
+      <hr>
+      <form action="" method="POST">
+        {% csrf_token %}
+        {% load crispy_forms_tags %}
+        {{form|crispy}}
+        
+        <!-- {{form.username.label}}
+          {{form.username}}
+          
+          {{form.email.label}}
+          {{form.email}}
+          
+          {{form.password1.label}}
+          {{form.password1}}
+          
+          {{form.password2.label}}
+          {{form.password2}} -->
+          {{form.errors}}
+          <button type="submit" class="btn btn-warning" style="min-width: 6vw;">Register</button>
+          <br><hr>
+          <p>If you have an account ? </p>
+          <a href="{% url 'loginPage' %}" type="button" class="btn btn-warning" style="min-width: 6vw;">Login</a>
+        </form>
+      </div>
+  </div>
+</div>
+
+
+{% endblock content %}

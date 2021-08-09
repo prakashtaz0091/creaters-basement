@@ -1,0 +1,649 @@
+{% load static %}
+<!doctype html>
+
+<head>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="{% static 'app/images/CB-01.png' %}" type="image/x-icon">
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Creators Basement</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'app/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'app/css/bootstrap-theme.min.css' %}">
+  <link rel="stylesheet" href="{% static 'app/css/fontAwesome.css' %}">
+  <link rel="stylesheet" href="{% static 'app/css/mystyle.css' %}">
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+  <script src="{% static 'app/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+
+</head>
+
+<body>
+  <div class="se-pre-con"></div>
+
+  <!-- styling -->
+  <!-- ****************************************************************** -->
+  <!-- ****************************************************************** -->
+  <style>
+    .no-js #loader {
+      display: none;
+    }
+
+    .js #loader {
+      display: block;
+      position: absolute;
+      left: 100px;
+      top: 0;
+    }
+
+    .se-pre-con {
+      position: fixed;
+      left: 0px;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      background: url(https://smallenvelop.com/wp-content/uploads/2014/08/Preloader_1.gif) center no-repeat #fff;
+    }
+
+    .imgbox {
+      display: grid;
+      height: 100%;
+    }
+
+    .fit1 {
+      max-width: 100%;
+      max-height: 100vh;
+      margin: auto;
+    }
+  </style>
+
+  <!-- ****************************************************************** -->
+  <!-- ****************************************************************** -->
+
+
+
+  <script type="text/javascript">
+    setTimeout(function () {
+      $('.se-pre-con').fadeToggle();
+    }, 2000);
+    lightGallery(document.getElementById('lightgallery'), {
+      thumbnail: true,
+    });
+  </script>
+  <div class="overlay"></div>
+  <section class="top-part">
+    <div class="imgbox">
+      <img class="fit1" src="{% static 'app/images/image4.jpg' %}">
+    </div>
+  </section>
+
+
+  <section class="cd-hero">
+
+    <div class="cd-slider-nav">
+      <nav>
+        <div id="logo">
+          <a href="#"><img src="{% static 'app/images/CB-01.png' %}" alt="Aleq" /></a>
+        </div>
+
+        <span class="cd-marker item-1"></span>
+        <ul>
+
+          <li class="selected"><a href="#0">
+              <div class="image-icon"><img src="{% static 'app/images/home-icon.png' %}"></div>
+              <h6>Welcome</h6>
+            </a></li>
+          <li><a href="#0">
+              <div class="image-icon"><img src="{% static 'app/images/about-icon.png' %}"></div>
+              <h6>About Us</h6>
+            </a></li>
+          <li><a href="#0">
+              <div class="image-icon"><img src="{% static 'app/images/music-iconok1.png' %}"></div>
+              <h6>Tracks</h6>
+            </a></li>
+          <li><a href="#0">
+              <div class="image-icon"><img src="{% static 'app/images/projects-icon.png' %}"></div>
+              <h6>Projects</h6>
+            </a></li>
+          <li><a href="#0">
+              <div class="image-icon"><img src="{% static 'app/images/recording.png' %}"></div>
+              <h6>Recording</h6>
+            </a></li>
+          <li><a href="#0">
+              <div class="image-icon"><img src="{% static 'app/images/contact-icon.png' %}"></div>
+              <h6>Contact Us</h6>
+            </a></li>
+
+
+        </ul>
+      </nav>
+    </div> <!-- .cd-slider-nav -->
+
+    <ul class="cd-hero-slider">
+
+
+
+      <!-- creater's basement -->
+      <!-- --------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------- -->
+      <li class="selected">
+        <div class="heading">
+          <h1>CREATOR'S BASEMENT
+
+          </h1>
+          <span>Welcome To Our Site</span>
+        </div>
+        <div class="cd-full-width first-slide">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="content first-content">
+                  <h4 style="color: white;">
+                    <p>
+                      {% for d in descriptions %}
+
+                      {% if d.label == "CBtext" %}
+                      {{d.desc}}
+                      {% endif %}
+
+                      {% endfor %}
+
+
+                      {% if admin %}
+                    <form action="{% url 'edit' 'CBtext' %}">
+                      <button type="submit" class="btn btn-primary">Edit</button>
+                    </form>
+                    {% endif %}
+
+
+                    </p>
+
+                    <div class="primary-button">
+                      <a href="{% url 'getOurMusic' %}"><strong>Get Your Track</strong></a>
+                    </div>
+                    <div class="primary-button">
+
+                      {% if logged_in %}
+                      <a href="{% url 'cart' %}"><strong>Cart</strong></a>
+                      <a href="{% url 'logoutUser' %}"><strong>Logout</strong></a>
+
+                      {% else %}
+                      <a href="{% url 'loginPage' %}"><strong>Login</strong></a>
+
+                    </div>
+                    <div class="primary-button">
+                      <a href="{% url 'registerPage' %}"><strong>Signup</strong></a>
+                    </div>
+
+
+                    {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+
+
+
+
+
+
+      <!-- --------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------- -->
+
+      <!-- About us -->
+      <!-- --------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------- -->
+
+      <li>
+        <div class="heading">
+          <h1>About Us</h1>
+          <span>Get More Info About Our Agency</span>
+        </div>
+        <div class="cd-half-width second-slide">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="content second-content">
+                  <div class="row">
+                    <div class="col-md-6 left-image">
+                      <img src="{% static 'app/images/image3.jpg' %}" style="border: 2px solid white; height: 50%;">
+                    </div>
+                    <div class="col-md-6">
+                      <div class="right-about-text">
+                        <h4 style="color: white;">Who we are?</h4>
+                        <p>{% for d in descriptions %}
+
+                          {% if d.label == "who we are" %}
+                          {{d.desc}}
+                          {% endif %}
+
+                          {% endfor %}
+
+
+                          {% if admin %}
+                        <form action="{% url 'edit' 'who we are' %}">
+                          <button type="submit" class="btn btn-primary">Edit</button>
+                        </form>
+                        {% endif %}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="left-about-text">
+                        <h4 style="color: white;">What we do?</h4>
+                        <p>
+                          {% for d in descriptions %}
+
+                          {% if d.label == "what we do" %}
+                          {{d.desc}}
+                          {% endif %}
+
+                          {% endfor %}
+
+
+                          {% if admin %}
+                        <form action="{% url 'edit' 'what we do' %}">
+                          <button type="submit" class="btn btn-primary">Edit</button>
+                        </form>
+                        {% endif %}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-md-6 right-image">
+                      <img src="{% static 'app/images/image2.jpg' %}" style="border: 2px solid white;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <!-- --------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------- -->
+
+      <!-- Audio Library -->
+      <!-- --------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------- -->
+
+      <li>
+        <div class="heading">
+          <h1>Audio Library</h1>
+          <span>Listen and find the best beat for your hiphop track.</span>
+        </div>
+        <div class="cd-half-width third-slide">
+          <div class="container">
+            <div class="cd-half-width fourth-slide">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="content fourth-content">
+                      <div class="row">
+                        <strong>
+                          <p>Audio Previwes</p>
+                        </strong>
+
+                        {% for audio in audios%}
+
+                        <div class="col-md-4 project-item">
+                          <div class="ok">
+                            <div class="card">
+                              <img src="{% static 'app/images/headphone.png' %}" class="card-img-top"
+                                style="background-color: yellow;" alt="..." width="290px" height="290px" />
+                              <div class="card-body">
+                                <h5 style="color: white;"><strong>{{audio.file|truncatechars:20}}</strong></h5>
+                                <audio controls controlsList="nodownload">
+                                  <source src="{{audio.file.url}}" type="audio/ogg">
+                                  <!--<source src="mus/tracks/Drake - God's Plan.ogg" type="audio/ogg"> -->
+                                  <!-- <source src="{{ MEDIA_URL }}/tracks/Drake - God's Plan.mp3" type="audio/mpeg"> -->
+                                  <!-- Your browser does not support the audio element.-->
+                                </audio>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        {% endfor %}
+
+
+                      </div>
+
+
+                      <div class="primary-button">
+                        <a href="{% url 'newMusic' %}">View Music Gallary</a>
+                        <a href="{% url 'getOurMusic' %}">Get Our Music</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+        </div>
+      </li>
+      <!-- --------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------- -->
+      <!-- Our Projects -->
+      <!-- --------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------- -->
+
+      <li>
+        <div class="heading">
+          <h1>Our projects</h1>
+          <span>Here you can check our recent projects</span><br>
+
+          {% if admin %}
+
+          <span>
+            <form action="{% url 'addYoutubeLink' %}" method="POST" class="pt-5">
+              {% csrf_token %}
+              <input id="link" type="text" placeholder="Youtube Video Link" name="link" style="height: 2.5em;">
+              <button type="submit" class="btn btn-success">Add Link</button>
+            </form>
+          </span>
+          {% endif %}
+          <style>
+            #link:focus {
+              color: black;
+            }
+          </style>
+        </div>
+        <div class="cd-half-width fourth-slide">
+
+
+          <!--This is video section -->
+          <div class="cd-half-width fourth-slide">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="content fourth-content">
+                    <div class="row">
+                      <strong>
+                        <p>Video Previwes</p>
+                      </strong>
+
+
+
+
+
+
+
+
+
+                      {% for link in youtubeLinks %}
+                      <div class="col-md-4 project-item">
+                        <div class="ok">
+                          <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="pb-video-frame" width="100%" height="230"
+                              src="https://www.youtube.com/embed/{{ link.link_id }}" frameborder="0"
+                              allowfullscreen></iframe><br>
+                          </div>
+                        </div>
+
+                        {% if admin %}
+                        <form action="{% url 'removeYtLink' link.id %}" method="post">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                        {% endif %}
+
+
+                      </div>
+                      {% endfor %}
+
+
+
+
+                    </div>
+
+                    <div class="primary-button">
+                      <a href="#">View video Gallary</a>
+                      <a href="#">Get Our Videos</a>
+                      <a href="{% url 'memories' %}">View Our Memories</a>
+                    </div>
+                    <style>
+                      .primary-button a {
+                        margin-bottom: 2px;
+                      }
+                    </style>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--This is end of video section -->
+        </div>
+        </div>
+      </li>
+
+      <!-- --------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------- -->
+
+      <!-- Recording section -->
+      <!-- --------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------- -->
+
+      <li>
+        <div class="heading">
+          <h1>RECORDING SECTION</h1>
+          <span>We accept all the recorded audio/videos for <strong>EDITING</strong></span>
+        </div>
+        <div class="cd-half-width third-slide">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="content third-content">
+                  <div class="row">
+                    <div class="col-md-7 left-image">
+                      <img src="{% static 'app/images/recordingimage.jpg' %}" style="border:2px solid white;">
+                    </div>
+                    <div class="col-md-5">
+                      <div class="right-feature-text">
+                        <h4 style="color: white;">Recording Details: <em>Creators Basement</em></h4>
+                        <p>
+                          {% for d in descriptions %}
+
+                          {% if d.label == "recording detail" %}
+                          {{d.desc}}
+                          {% endif %}
+
+                          {% endfor %}
+
+
+                          {% if admin %}
+                        <form action="{% url 'edit' 'recording detail' %}">
+                          <button type="submit" class="btn btn-primary">Edit</button>
+                        </form>
+                        {% endif %}
+                        </p>
+                        <div class="feature-list">
+                          <ul>
+                            <p>-Audio Recording </p>
+                            <p>- Video Editing</p>
+
+                          </ul>
+                        </div>
+
+                        {% if logged_in %}
+                        {% if not admin %}
+
+                        <hr>
+                        <br>
+                        <h3>Give your RAW content and We will back you Dashing product</h3>
+
+                        {% endif %}
+
+
+                        {% endif %}
+
+
+                        <div class="primary-button">
+                          <a href="#">Discover More</a>
+
+                          {% if logged_in %}
+
+                          {% if admin %}
+                          <a href="{% url 'uploadContent' %}">Upload Content</a>
+                          <a href="{% url 'viewUserUploadedContents' %}">View User Uploaded Content</a>
+                          <a href="{% url 'viewCompletedProjects' %}">View Completed Projects</a>
+                          <a href="{% url 'viewDemoRequest' %}">View Demo Requests</a>
+                          {% else %}
+                          <a href="{% url 'uploadContentUser' %}">Give Raw Content</a>
+                          <a href="{% url 'getFinalProduct' %}">Get final Product</a>
+
+                          {% endif %}
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+
+      <!-- --------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------- -->
+
+      <!-- contact us -->
+      <!-- --------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------- -->
+
+      <li>
+        <div class="heading">
+          <h1>Contact us</h1>
+          <span>You'll be responded within 48 hrs</span>
+        </div>
+        <div class="cd-half-width fivth-slide">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="content fivth-content">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="left-info">
+                        <p>
+                          {% for d in descriptions %}
+
+                          {% if d.label == "contact desc" %}
+                          {{d.desc}}
+                          {% endif %}
+
+                          {% endfor %}
+
+
+                          {% if admin %}
+                        <form action="{% url 'edit' 'contact desc' %}">
+                          <button type="submit" class="btn btn-primary">Edit</button>
+                        </form>
+                        {% endif %}
+                        <br><br>
+                        <em>SHIVASATAKSHI-07<br>JHAPA,NEPAL</em>
+                        </p>
+                        <ul class="social-icons">
+                          <i><a href="#"><i class="fa fa-facebook fa-3x" style="color: blue;"></i></a></i>
+                          <i><a href="#"><i class="fa fa-instagram fa-3x" style="color: red;"></i></a></i>
+                          <i><a href="#"><i class="fa fa-twitter fa-3x" style="color: blue;"></i></a></i>
+                          <i><a href="#"><i class="fa fa-youtube fa-3x" style="color: red;"></i></a></i>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="row">
+                        <form id="contact" action="{% url 'contactUs' %}" method="post">
+                          {% csrf_token %}
+                          <div class="col-md-6">
+                            <fieldset>
+                              <input name="name" type="text" class="form-control" id="name" placeholder="Your Name"
+                                required>
+                            </fieldset>
+                          </div>
+                          <div class="col-md-6">
+                            <fieldset>
+                              <input name="email" type="email" class="form-control" id="email" placeholder="Email"
+                                required>
+                            </fieldset>
+                          </div>
+                          <div class="col-md-12">
+                            <fieldset>
+                              <textarea name="message" rows="6" class="form-control" id="message" placeholder="Message"
+                                required></textarea>
+                            </fieldset>
+                          </div>
+                          <div class="col-md-12">
+                            <fieldset>
+                              <button type="submit" id="form-submit" class="btn">Send Message</button>
+                            </fieldset>
+                          </div>
+
+                          {% if admin %}
+                          <div class="col-md-12 py-3">
+                            <fieldset>
+                              <a href="{% url 'viewMessages' %}" type="button" class="btn btn-warning"> View
+                                Messages</a>
+                            </fieldset>
+                          </div>
+
+                          {% endif %}
+
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- --------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------- -->
+
+    </ul> <!-- .cd-hero-slider -->
+  </section> <!-- .cd-hero -->
+
+
+  <footer>
+    <p></p>
+  </footer>
+
+
+  <script>
+
+
+
+
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script>
+    src = '{% static "app/js/vendor/jquery-1.11.2.min.js" %}';
+    window.jQuery || document.write('<script src=' + src + '><\/script>')</script>
+
+
+  <script src="{% static 'app/js/vendor/bootstrap.min.js' %}"></script>
+
+  <script src="{% static 'app/js/plugins.js' %}"></script>
+  <script src="{% static 'app/js/main.js' %}"></script>
+
+</body>
+
+</html>
