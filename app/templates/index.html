@@ -15,6 +15,9 @@
   <link rel="stylesheet" href="{% static 'app/css/fontAwesome.css' %}">
   <link rel="stylesheet" href="{% static 'app/css/mystyle.css' %}">
 
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
   <script src="{% static 'app/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
@@ -147,7 +150,7 @@
                       {% for d in descriptions %}
 
                       {% if d.label == "CBtext" %}
-                      {{d.desc}}
+                      {{d.desc|linebreaks}}
                       {% endif %}
 
                       {% endfor %}
@@ -163,22 +166,25 @@
                     </p>
 
                     <div class="primary-button">
+                      {% if logged_in %}
+                      <a href="{% url 'cart' %}"><strong>Cart</strong></a>
+                      {% else %}
+                      <a href="{% url 'registerPage' %}"><strong>Signup</strong></a>
+
+                      {% endif %}
+                    </div>
+                    <div class="primary-button">
                       <a href="{% url 'getOurMusic' %}"><strong>Get Your Track</strong></a>
                     </div>
                     <div class="primary-button">
 
                       {% if logged_in %}
-                      <a href="{% url 'cart' %}"><strong>Cart</strong></a>
                       <a href="{% url 'logoutUser' %}"><strong>Logout</strong></a>
 
                       {% else %}
                       <a href="{% url 'loginPage' %}"><strong>Login</strong></a>
 
                     </div>
-                    <div class="primary-button">
-                      <a href="{% url 'registerPage' %}"><strong>Signup</strong></a>
-                    </div>
-
 
                     {% endif %}
                 </div>
@@ -188,7 +194,16 @@
         </div>
       </li>
 
+      <style>
+        .primary-button {
+          display: inline-flex;
+          flex-direction: row;
+        }
 
+        .primary-button>a {
+          margin-right: 15px;
+        }
+      </style>
 
 
 
@@ -221,7 +236,7 @@
                         <p>{% for d in descriptions %}
 
                           {% if d.label == "who we are" %}
-                          {{d.desc}}
+                          {{d.desc|linebreaks}}
                           {% endif %}
 
                           {% endfor %}
@@ -244,7 +259,7 @@
                           {% for d in descriptions %}
 
                           {% if d.label == "what we do" %}
-                          {{d.desc}}
+                          {{d.desc|linebreaks}}
                           {% endif %}
 
                           {% endfor %}
@@ -301,7 +316,7 @@
                                 style="background-color: yellow;" alt="..." width="290px" height="290px" />
                               <div class="card-body">
                                 <h5 style="color: white;"><strong>{{audio.file|truncatechars:20}}</strong></h5>
-                                <audio controls controlsList="nodownload">
+                                <audio controls controlsList="nodownload" style="max-width: 65vw;">
                                   <source src="{{audio.file.url}}" type="audio/ogg">
                                   <!--<source src="mus/tracks/Drake - God's Plan.ogg" type="audio/ogg"> -->
                                   <!-- <source src="{{ MEDIA_URL }}/tracks/Drake - God's Plan.mp3" type="audio/mpeg"> -->
@@ -458,7 +473,7 @@
                           {% for d in descriptions %}
 
                           {% if d.label == "recording detail" %}
-                          {{d.desc}}
+                          {{d.desc|linebreaks}}
                           {% endif %}
 
                           {% endfor %}
@@ -491,23 +506,32 @@
                         {% endif %}
 
 
+
+                        {% if logged_in %}
+
+                        {% if admin %}
                         <div class="primary-button">
-                          <a href="#">Discover More</a>
-
-                          {% if logged_in %}
-
-                          {% if admin %}
                           <a href="{% url 'uploadContent' %}">Upload Content</a>
-                          <a href="{% url 'viewUserUploadedContents' %}">View User Uploaded Content</a>
-                          <a href="{% url 'viewCompletedProjects' %}">View Completed Projects</a>
-                          <a href="{% url 'viewDemoRequest' %}">View Demo Requests</a>
-                          {% else %}
-                          <a href="{% url 'uploadContentUser' %}">Give Raw Content</a>
-                          <a href="{% url 'getFinalProduct' %}">Get final Product</a>
-
-                          {% endif %}
-                          {% endif %}
                         </div>
+                        <div class="primary-button">
+                          <a href="{% url 'viewUserUploadedContents' %}">User Uploaded Content</a>
+                        </div>
+                        <div class="primary-button">
+                          <a href="{% url 'viewCompletedProjects' %}">Completed Projects</a>
+                        </div>
+                        <div class="primary-button">
+                          <a href="{% url 'viewDemoRequest' %}">Demo Requests</a>
+                        </div>
+                        {% else %}
+                        <div class="primary-button">
+                          <a href="{% url 'uploadContentUser' %}">Give Raw Content</a>
+                        </div>
+                        <div class="primary-button">
+                          <a href="{% url 'getFinalProduct' %}">Get final Product</a>
+                        </div>
+
+                        {% endif %}
+                        {% endif %}
                       </div>
                     </div>
                   </div>
@@ -516,7 +540,9 @@
             </div>
           </div>
         </div>
+        </div>
       </li>
+
 
 
       <!-- --------------------------------------------------------------------------------- -->
@@ -543,7 +569,7 @@
                           {% for d in descriptions %}
 
                           {% if d.label == "contact desc" %}
-                          {{d.desc}}
+                          {{d.desc|linebreaks}}
                           {% endif %}
 
                           {% endfor %}
@@ -555,13 +581,29 @@
                         </form>
                         {% endif %}
                         <br><br>
-                        <em>SHIVASATAKSHI-07<br>JHAPA,NEPAL</em>
+                        <em>{% for d in descriptions %}
+
+                          {% if d.label == "location" %}
+                          {{d.desc|linebreaks}}
+                          {% endif %}
+
+                          {% endfor %}
+
+
+                          {% if admin %}
+                          <form action="{% url 'edit' 'location' %}">
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                          </form>
+                          {% endif %}
+                        </em>
                         </p>
                         <ul class="social-icons">
-                          <i><a href="#"><i class="fa fa-facebook fa-3x" style="color: blue;"></i></a></i>
+                          <i><a href="https://www.facebook.com/creatorsbasment"><i class="fa fa-facebook fa-3x"
+                                style="color: blue;"></i></a></i>
                           <i><a href="#"><i class="fa fa-instagram fa-3x" style="color: red;"></i></a></i>
                           <i><a href="#"><i class="fa fa-twitter fa-3x" style="color: blue;"></i></a></i>
-                          <i><a href="#"><i class="fa fa-youtube fa-3x" style="color: red;"></i></a></i>
+                          <i><a href="https://m.youtube.com/channel/UCCP_dzK6yrGvRnXJ4Ddk_kA/videos"><i
+                                class="fa fa-youtube fa-3x" style="color: red;"></i></a></i>
                         </ul>
                       </div>
                     </div>

@@ -66,7 +66,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ audio.file.name|truncatechars:60}} - demo</h5>
 
-                    <audio controls controlsList="nodownload">
+                    <audio controls controlsList="nodownload" style="max-width: 60vw;">
                         <source src="{{audio.file.url}}" type="audio/ogg">
                         <!-- <source src="{{audio.file.url}}" type="audio/mpeg"> -->
                         Your browser does not support the audio element.

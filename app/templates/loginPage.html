@@ -7,10 +7,34 @@ User Login
 
 {% block content %}
 {% load static %}
- <!-- Font Awesome -->
- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
 
- 
+<style>
+  .login-form {
+    background-color: rgba(255, 255, 255, .15);
+  }
+
+  .login-form {
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(5px);
+  }
+
+  .body {
+    background-image: url('../static/app/images/music-images/music.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+  }
+
+
+
+  .form-group {
+    margin-bottom: 2em;
+  }
+</style>
+
+
 <nav class="navbar navbar-expand-lg navbar navbar-warning bg-warning">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'home' %}">
@@ -28,19 +52,13 @@ User Login
 
       </ul>
     </div>
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <li class="nav-item">
-        <a href="{% url 'home' %}" style="text-decoration: none;" class="nav-link text-dark"><i
-            class="fas fa-home fa-2x "></i>
-          <big><big>Home</big></big></a>
-      </li>
-    </ul>
+    
   </div>
 </nav>
 
 
 
-<div class="container-fluid bg-dark py-5" style="min-height: 100vh;">
+<div class="container-fluid bg-dark py-5 body" style="min-height: 100vh;">
 
   <!-- messages -->
   {% for message in messages %}
@@ -55,27 +73,27 @@ User Login
   <!-- messages ends here -->
 
 
-  <div class="container bg-light py-5">
-    <div class="container col-md-6 mx-auto rounded">
+  <div class="container py-5 login-form " style="max-width: 600px;">
+    <div class=" col-md-8 mx-auto rounded text-light">
 
-      <h1 class="text-center">User Login</h1>
-      <hr>
+      <h1 class="text-center">USER LOGIN</h1>
+      <hr class="bg-light">
       <form action="" method="POST">
         {% csrf_token %}
 
         <div class="form-group">
           <label for="username">Username*</label>
-          <input type="text" class="form-control" name="username">
+          <input type="text" class="form-control" name="username" placeholder="user@123" required>
         </div>
         <div class="form-group">
           <label for="password">Password*</label>
-          <input type="password" class="form-control" name="password">
+          <input type="password" class="form-control" name="password" placeholder="********" required>
         </div>
 
 
         <button type="submit" class="btn btn-warning" style="min-width: 8vw;">Login</button>
         <br>
-        <hr>
+        <hr class="bg-light">
         <p>Don't have an account ?</p>
         <a href="{% url 'registerPage' %}" type="button" class="btn btn-warning" style="min-width: 8vw;">Register</a>
       </form>

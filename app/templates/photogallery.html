@@ -14,7 +14,9 @@
 
 </head>
 
-<body class="bg-dark">
+
+<body>
+  <!-- nav -->
   <nav class="navbar navbar-expand-lg navbar navbar-warning bg-warning">
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'home' %}">
@@ -36,63 +38,301 @@
     </div>
   </nav>
 
+  <!-- nav ends -->
 
-
-  <div class="container" style="min-height: 85vh;">
-    <div class="jumbotron text-white">
-      <h1>Image Gallery</h1>
-      <p>Some of our great momories.
-    </div>
-
-    {% if admin %}
+  <!-- for admin -->
+  {% if admin %}
+  <div class="container bg-dark" style="max-width: 600px;">
     <hr><br>
     <div class="jumbotron text-white">
-      <h1>Upload Image</h1>
+      <h1>Upload Image</h1><br>
       <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="input-group">
           <input type="file" name="image" class="form-control" id="" aria-describedby="inputGroupFileAddon04"
-            aria-label="Upload" required>
-          <button class="btn btn-outline-secondary" type="submit">Upload</button>
+            aria-label="Upload" multiple required>
+          <button class="btn btn-outline-success" type="submit">Upload</button>
         </div>
       </form>
     </div>
     <br><br>
-    {% endif %}
+  </div>
+  {% endif %}
+  <!-- for admin ends -->
 
 
-    <div class="row">
-      {% for image in images %}
+  <h1 class="text-center my-5">"Our Memories"</h1>
 
-      <div class="col-sm-4 col-md-3 mb-3">
-        <img src="{{image.image.url}}" alt="" class="fluid img-thumbnail">
+  <div class="gallery px-3" id="gallery">
+    {% for i in images %}
+
+    <div class="gallery-item">
+      <div class="content"><img src="{{i.image.url}}" alt="">
 
         {% if admin %}
-        <form action="{% url 'removeMemories' image.id %}" method="POST" class="text-center">
+
+
+        <form action="{% url 'removeMemories' i.id %}" method="post">
           {% csrf_token %}
-          
-          <button type="submit" class="btn btn-danger ">Remove</button>
+          <button type="submit" class="btn btn-danger">Remove</button>
         </form>
         {% endif %}
       </div>
-
-      {% endfor %}
-
     </div>
+
+    {% endfor %}
   </div>
 
-  <footer class="bg-light text-center text-lg-start">
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color:#FF9900;">
-      © 2020 Copyright:<br>
-      <a class="text-dark" href="#">Creators Basement</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
-
 </body>
+
+
+
+
+
+<!-- ***************************************************************************************** -->
+<!-- CSS -->
+<!-- ***************************************************************************************** -->
+<style>
+  body {
+    background-color: #eee;
+  }
+
+  .hello {
+    opacity: 1 !important;
+  }
+
+  .full {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .full .content {
+    background-color: rgba(0, 0, 0, 0.75) !important;
+    height: 100%;
+    width: 100%;
+    display: grid;
+  }
+
+  .full .content img {
+    left: 50%;
+    transform: translate3d(0, 0, 0);
+    animation: zoomin 1s ease;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+  }
+
+  .byebye {
+    opacity: 0;
+  }
+
+  .byebye:hover {
+    transform: scale(0.2) !important;
+  }
+
+  .gallery {
+    display: grid;
+    grid-column-gap: 8px;
+    grid-row-gap: 8px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: 8px;
+  }
+
+  .gallery img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 16px #333;
+    transition: all 1.5s ease;
+  }
+
+  .gallery img:hover {
+    box-shadow: 0 0 32px #333;
+  }
+
+  .gallery .content {
+    padding: 4px;
+  }
+
+  .gallery .gallery-item {
+    transition: grid-row-start 300ms linear;
+    transition: transform 300ms ease;
+    transition: all 0.5s ease;
+    cursor: pointer;
+  }
+
+  .gallery .gallery-item:hover {
+    transform: scale(1.025);
+  }
+
+  @media (max-width: 600px) {
+    .gallery {
+      grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+    }
+  }
+
+  @media (max-width: 400px) {
+    .gallery {
+      grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+    }
+  }
+
+  @-moz-keyframes zoomin {
+    0% {
+      max-width: 50%;
+      transform: rotate(-30deg);
+      filter: blur(4px);
+    }
+
+    30% {
+      filter: blur(4px);
+      transform: rotate(-80deg);
+    }
+
+    70% {
+      max-width: 50%;
+      transform: rotate(45deg);
+    }
+
+    100% {
+      max-width: 100%;
+      transform: rotate(0deg);
+    }
+  }
+
+  @-webkit-keyframes zoomin {
+    0% {
+      max-width: 50%;
+      transform: rotate(-30deg);
+      filter: blur(4px);
+    }
+
+    30% {
+      filter: blur(4px);
+      transform: rotate(-80deg);
+    }
+
+    70% {
+      max-width: 50%;
+      transform: rotate(45deg);
+    }
+
+    100% {
+      max-width: 100%;
+      transform: rotate(0deg);
+    }
+  }
+
+  @-o-keyframes zoomin {
+    0% {
+      max-width: 50%;
+      transform: rotate(-30deg);
+      filter: blur(4px);
+    }
+
+    30% {
+      filter: blur(4px);
+      transform: rotate(-80deg);
+    }
+
+    70% {
+      max-width: 50%;
+      transform: rotate(45deg);
+    }
+
+    100% {
+      max-width: 100%;
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes zoomin {
+    0% {
+      max-width: 50%;
+      transform: rotate(-30deg);
+      filter: blur(4px);
+    }
+
+    30% {
+      filter: blur(4px);
+      transform: rotate(-80deg);
+    }
+
+    70% {
+      max-width: 50%;
+      transform: rotate(45deg);
+    }
+
+    100% {
+      max-width: 100%;
+      transform: rotate(0deg);
+    }
+  }
+</style>
+<!-- *************************************************************************** -->
+<!-- CSS ends -->
+<!-- *************************************************************************** -->
+
+
+
+<!-- *************************************************************************** -->
+<!-- js  -->
+<!-- *************************************************************************** -->
+<script type="text/javascript">
+  var gallery = document.querySelector('#gallery');
+  var getVal = function (elem, style) { return parseInt(window.getComputedStyle(elem).getPropertyValue(style)); };
+  var getHeight = function (item) { return item.querySelector('.content').getBoundingClientRect().height; };
+  var resizeAll = function () {
+    var altura = getVal(gallery, 'grid-auto-rows');
+    var gap = getVal(gallery, 'grid-row-gap');
+    gallery.querySelectorAll('.gallery-item').forEach(function (item) {
+      var el = item;
+      el.style.gridRowEnd = "span " + Math.ceil((getHeight(item) + gap) / (altura + gap));
+    });
+  };
+  gallery.querySelectorAll('img').forEach(function (item) {
+    item.classList.add('byebye');
+    if (item.complete) {
+      console.log(item.src);
+    }
+    else {
+      item.addEventListener('load', function () {
+        var altura = getVal(gallery, 'grid-auto-rows');
+        var gap = getVal(gallery, 'grid-row-gap');
+        var gitem = item.parentElement.parentElement;
+        gitem.style.gridRowEnd = "span " + Math.ceil((getHeight(gitem) + gap) / (altura + gap));
+        item.classList.remove('byebye');
+      });
+    }
+  });
+  window.addEventListener('resize', resizeAll);
+  gallery.querySelectorAll('.gallery-item').forEach(function (item) {
+    item.addEventListener('click', function () {
+      item.classList.toggle('full');
+    });
+  });
+</script>
+
+
+<!-- *************************************************************************** -->
+<!-- js ends -->
+<!-- *************************************************************************** -->
+
+
+
+<footer class="bg-light text-center text-lg-start">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color:#FF9900;">
+    © 2020 Copyright:<br>
+    <a class="text-dark" href="#">Creators Basement</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 
 </html>

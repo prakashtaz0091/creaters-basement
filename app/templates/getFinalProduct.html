@@ -119,7 +119,8 @@
           </div>
           {% endif %}
           {% else %}
-          >>> "{{audio.rawFile.name}}" project has not been completed yet. <br>
+          <p class="bg-light p-3 rounded " >{{audio.rawFile.name|truncatechars:40}} - <strong>pending</strong></p>
+          <br>
           {% endif %}
           {% endfor %}
         </div>
@@ -165,7 +166,8 @@
           {% endif %}
 
           {% else %}
-          >>> "{{video.rawFile.name}}" project has not been completed yet. <br>
+          <p class="bg-light p-3 rounded " >{{video.rawFile.name|truncatechars:50}} - <strong>pending</strong></p>
+          <br>
                       
           {% endif %}
           {% endfor %}

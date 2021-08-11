@@ -114,12 +114,12 @@
                         </div>
                     </div>
                     {% else %}
-                    <p>No final Audio yet</p>
+                    <p class="bg-light p-3 rounded">{{audio.rawFile.name|truncatechars:50}} - <strong>pending</strong></p>
                     {% endif %}
                     {% endfor %}
                 </div>
-            </div>
-
+            </div><br>
+<hr>
             <div class="col-md-6 mx-auto">
                 <h1 class="text-center text-light py-3" style="text-decoration-line: underline;"> Final Videos</h1>
 
@@ -153,7 +153,7 @@
                         </div>
                     </div>
                     {% else %}
-                    <p class="text-center">No Final Videos yet</p>
+                    <p class="bg-light p-3 rounded " >{{video.rawFile.name|truncatechars:50}} - <strong>pending</strong></p>
                     {% endif %}
                     {% endfor %}
 

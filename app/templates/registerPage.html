@@ -1,42 +1,107 @@
 {% extends "base.html" %}
+{% load static %}
+{% block links %}
+<!-- favicon -->
+<link rel="shortcut icon" href="{% static 'app/images/CB-01.png' %}" type="image/x-icon">
+
+{% endblock links %}
 
 {% block title %}
-  User Registration
+User Registration
 {% endblock title %}
 
-
 {% block content %}
-  
-<div class="container-fluid bg-dark py-5" style="min-height: 100vh;">
-  
-  <div class="container bg-light py-5">
-    <div class="container col-md-6 mx-auto rounded">
+<style>
+  .signup-form {
+    background-color: rgba(255, 255, 255, .15);
+  }
 
-      <h1 class="text-center">User Registration</h1>
-      <hr>
+  .signup-form {
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(5px);
+  }
+
+  .body {
+    background-image: url('../static/app/images/music-images/music.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+  }
+
+
+
+  .form-group {
+    margin-bottom: 2em;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar navbar-warning bg-warning">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}">
+      <img src="{% static 'app/images/assets/images/CB-01.png' %}" alt="" width="50" height="50">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a><strong style="color: white;">Creators Basement</strong></a>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- messages -->
+{% for message in messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{message}}!</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+
+<!-- messages ends here -->
+
+<div class="container-fluid bg-dark py-5 body" style="min-height: 100vh;">
+
+  <div class="container py-5 signup-form" style="max-width: 600px;">
+    <div class="col-md-8 mx-auto rounded text-light">
+
+      <h1 class="text-center">USER REGISTRATION</h1>
+      <hr class="bg-light">
       <form action="" method="POST">
         {% csrf_token %}
         {% load crispy_forms_tags %}
-        {{form|crispy}}
-        
-        <!-- {{form.username.label}}
-          {{form.username}}
-          
-          {{form.email.label}}
-          {{form.email}}
-          
-          {{form.password1.label}}
-          {{form.password1}}
-          
-          {{form.password2.label}}
-          {{form.password2}} -->
-          {{form.errors}}
-          <button type="submit" class="btn btn-warning" style="min-width: 6vw;">Register</button>
-          <br><hr>
-          <p>If you have an account ? </p>
-          <a href="{% url 'loginPage' %}" type="button" class="btn btn-warning" style="min-width: 6vw;">Login</a>
-        </form>
-      </div>
+        <!-- {{form|crispy}} -->
+
+        {{form.username.label}}*
+        {{form.username}}
+        <br>
+        {{form.email.label}}*
+        {{form.email}}
+        <br>
+
+        {{form.password1.label}}*
+        {{form.password1}}
+        <br>
+
+        {{form.password2.label}}*
+        {{form.password2}}
+        <br> {{form.errors}}
+        <button type="submit" class="btn btn-warning" style="min-width: 6vw;">Register</button>
+        <br>
+        <hr class="bg-light">
+        <p>Already have an account ? </p>
+        <a href="{% url 'loginPage' %}" type="button" class="btn btn-warning" style="min-width: 6vw;">Login</a>
+      </form>
+    </div>
   </div>
 </div>
 

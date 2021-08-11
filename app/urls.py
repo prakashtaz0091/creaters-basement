@@ -6,6 +6,8 @@ urlpatterns = [
     path('',views.home,name = 'home'),
     # path('adminPage',views.adminPage,name='adminPage'),
     path('registerPage/',views.registerPage,name='registerPage'),
+    path('gmail-validation/',views.validateEmail,name='validateEmail'),
+    path('resend-otp/<str:gmail>/',views.resendOtp,name='resendOtp'),
     path('loginPage/',views.loginPage,name='loginPage'),
     path('logoutUser/',views.logoutUser,name='logoutUser'),
 

@@ -13,6 +13,15 @@ class Customer(models.Model):  #not used in this project
         return self.name
     
 
+class VerifyUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    verified = models.BooleanField(default=False)
+    count = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.user.username
+    
+
 
 class AudioFile(models.Model):
     file = models.FileField(upload_to='')
@@ -120,6 +129,6 @@ class PhotoGallery(models.Model):
     image = models.ImageField(upload_to='images')
 
     def __str__(self):
-        return str(self.id)
+        return str(self.image.name)
     
     

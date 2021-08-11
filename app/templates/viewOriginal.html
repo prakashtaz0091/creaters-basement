@@ -51,7 +51,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a href="{% url 'uploadContent' %}" style="text-decoration: none;" class="nav-link text-dark">
-                        <big><big>Upload Demo</big></big></a>
+                        <big><big>| Set Price</big></big></a>
                 </li>
             </ul>
 
@@ -100,7 +100,13 @@
 
                         <ul>
                             <li class="price ">
+                                {% if audio.audioFile.total_price <= 0 %}
+                                <a href="{% url 'uploadContent' %}" style="text-decoration:none; color:black;" >Set Price</a>  
+                                      
+                        
+                                {% else %}
                                 Rs. {{audio.audioFile.total_price }}
+                                {% endif %}
 
                             <li>
 

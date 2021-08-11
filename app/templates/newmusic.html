@@ -63,13 +63,13 @@
           </button>
         </div> &nbsp;&nbsp;
         <!-- Icon -->
-        <a class="text-reset me-3 " href="#">
+        <a class="text-reset me-3 " href="{% url 'getOurMusic' %}">
           <i class="fas fa-shopping-cart fa-2x"></i>
         </a>
 
 
         <!-- Avatar -->
-        <a class="dropdown-toggle d-flex align-items-center hidden-arrow " href="#" id="navbarDropdownMenuLink"
+        <!-- <a class="dropdown-toggle d-flex align-items-center hidden-arrow " href="#" id="navbarDropdownMenuLink"
           role="button" data-mdb-toggle="dropdown" aria-expanded="false">
           <img src="{% static 'app/images/bhupen.jpg' %}" class="rounded-circle" height="50" alt="" loading="lazy" />
         </a>
@@ -83,7 +83,7 @@
           <li>
             <a class="dropdown-item" href="#">Logout</a>
           </li>
-        </ul>
+        </ul> -->
       </div>
       <!-- Right elements -->
     </div>
@@ -92,7 +92,7 @@
   <!-- Navbar -->
 
   <div id="jk" style="top: 10px;">
-    <div class="player">
+    <div class="player mx-2">
 
       <div class="player__header">
 
@@ -116,7 +116,9 @@
 
 
             <!-- <img class="img slider__img" src="{% static 'app/images/bhupen.jpg' %}" alt="cover"> -->
-   
+
+            <img class="img slider__img" src="{% static 'app/images/bhupen.jpg' %}" alt="cover">
+
 
 
           </div>
@@ -166,14 +168,14 @@
             <b class="player__song-name">Creaters Basement</b>
             <span class="flex">
 
-              <span class="player__title">{{audio.file|truncatechars:50}}</span>
+              <span class="player__title">{{audio.file|truncatechars:20}}</span>
               <span class="player__song-time"></span>
 
             </span>
 
           </p>
 
-          <audio class="audio" src="{{ audio.file }}"></audio>
+          <audio class="audio" src="{{ audio.file.url }}"></audio>
 
         </li>
         {% endfor %}
